@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RoTools</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* Hamburger Menu Style */
+        .hamburger {
+            font-size: 30px;
+            cursor: pointer;
+            padding: 15px;
+            background-color: #333;
+            color: white;
+            display: block;
+            text-align: center;
+        }
+
+        .menu {
+            display: none; /* Hidden by default */
+            background-color: #333;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .menu.active {
+            display: block;
+        }
+
+        .menu ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .menu li {
+            padding: 10px;
+            text-align: center;
+            background-color: #444;
+        }
+
+        .menu li a {
+            text-decoration: none;
+            color: white;
+            display: block;
+        }
+
+        .menu li:hover {
+            background-color: #555;
+        }
+
+        /* Section Styles */
+        .section {
+            display: none; /* Hidden by default */
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        #documentary, #howToUse, #create {
+            display: none; /* Start by hiding all sections */
+        }
+
+        .active-section {
+            display: block; /* Show the active section */
+        }
+
+        /* Styling for the page content */
+        h2 {
+            color: #333;
+        }
+
+        p {
+            color: #555;
+        }
+
+        #functionLink {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #007BFF;
+        }
+
+        #functionLink a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hamburger Icon -->
+    <div class="hamburger" onclick="toggleMenu()">&#9776;</div>
+
+    <!-- Menu -->
+    <div id="menu" class="menu">
+        <ul>
+            <li><a href="#" onclick="showSection('documentary')">Documentary</a></li>
+            <li><a href="#" onclick="showSection('howToUse')">How to Use</a></li>
+            <li><a href="#" onclick="showSection('create')">Create</a></li>
+        </ul>
+    </div>
+
+    <!-- Sections -->
+    <div id="documentary" class="section">
+        <h2>Documentary</h2>
+        <p>The RoTools project is an online platform that allows Roblox users to create their own custom tools and scripts, such as key systems, API generators, and much more. The goal of RoTools is to simplify the process of creating and managing Roblox tools by offering a user-friendly interface and easy-to-use services. Our platform integrates with Roblox Studio, enabling users to enhance their gaming experience with custom functionalities and utilities.</p>
+    </div>
+
+    <div id="howToUse" class="section">
+        <h2>How to Use</h2>
+        <p>To use RoTools, simply follow these steps:</p>
+        <ol>
+            <li>Navigate to the homepage of RoTools and select the "Create" tab to start building your tool.</li>
+            <li>Choose the type of tool you want to create (e.g., API generator, Key system, etc.) from the list of available functions.</li>
+            <li>Fill in the necessary details and click "Generate" to create your tool.</li>
+            <li>Once your tool is generated, you will be given a unique link to access it from Roblox Studio. Use this link to integrate the tool into your game.</li>
+            <li>If you're creating a key system, you can generate a unique key and use it to protect specific parts of your game or scripts.</li>
+        </ol>
+        <p>That's it! You're ready to use RoTools to enhance your Roblox creations.</p>
+    </div>
+
+    <div id="create" class="section">
+        <h2>Create</h2>
+        <p>The "Create" section is where you can create your custom tools for Roblox. Here's how you can get started:</p>
+        <ul>
+            <li><strong>API Generator:</strong> Create an API link for your game to interact with external services.</li>
+            <li><strong>Key System:</strong> Generate a key to protect certain parts of your game, ensuring that only authorized users can access specific features.</li>
+            <li><strong>HTTP Service:</strong> Generate and manage HTTP service links for sending data to and from external servers.</li>
+            <li><strong>API Service:</strong> Set up an API service that can handle requests from your game and return the desired response.</li>
+            <li><strong>Key Service:</strong> Manage and distribute keys to players for access to special game features.</li>
+        </ul>
+        <p>Simply choose the function you want to create, fill out the required details, and click "Generate" to create your tool. You will then receive a unique link that you can use in Roblox Studio to connect the tool to your game.</p>
+    </div>
+
+    <!-- Dynamic Function Link -->
+    <div id="functionLink">
+        <p>Function Link: <a id="link" href="#" target="_blank">Click here</a></p>
+    </div>
+
+    <script>
+        // Toggle the visibility of the menu
+        function toggleMenu() {
+            const menu = document.getElementById("menu");
+            menu.classList.toggle("active");
+        }
+
+        // Show the selected section and hide others
+        function showSection(section) {
+            const sections = document.querySelectorAll(".section");
+            sections.forEach(s => s.classList.remove("active-section")); // Hide all sections
+
+            const selectedSection = document.getElementById(section);
+            selectedSection.classList.add("active-section"); // Show the selected section
+
+            // Update the FunctionLink based on the selected section
+            updateFunctionLink(section);
+        }
+
+        // Update the FunctionLink dynamically based on the selected section
+        function updateFunctionLink(section) {
+            const link = document.getElementById("link");
+            let functionLink = "https://brilliant-haupia-679500.netlify.app/";
+
+            // Generate the function link based on section
+            switch (section) {
+                case 'documentary':
+                    functionLink += "D1?key-system.lua"; // Example, you can modify accordingly
+                    break;
+                case 'howToUse':
+                    functionLink += "H2?api-service.lua";
+                    break;
+                case 'create':
+                    functionLink += "C3?http-service.lua";
+                    break;
+                case 'apiGenerator':
+                    functionLink += "A1?api-generator.lua"; // API Generator tool
+                    break;
+                case 'keySystem':
+                    functionLink += "K2?key-system.lua"; // Key System tool
+                    break;
+                case 'httpService':
+                    functionLink += "H3?http-service.lua"; // HTTP Service tool
+                    break;
+                case 'apiService':
+                    functionLink += "A4?api-service.lua"; // API Service tool
+                    break;
+                case 'keyService':
+                    functionLink += "K5?key-service.lua"; // Key Service tool
+                    break;
+                default:
+                    functionLink += "home";
+                    break;
+            }
+
+            // Update the link text and href
+            link.href = functionLink;
+            link.textContent = functionLink;
+        }
+    </script>
+</body>
+</html>
